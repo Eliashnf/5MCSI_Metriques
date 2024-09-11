@@ -7,35 +7,17 @@
     <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
     <style>
         body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background-color: #e9ecef;
-            color: #343a40;
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
             margin: 0;
             padding: 0;
         }
         .container {
-            width: 80%;
-            max-width: 1200px;
-            margin: 30px auto;
-            padding: 20px;
-            background-color: #ffffff;
-            border-radius: 8px;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            width: 90%;
+            margin: 50px auto;
         }
         h1 {
             text-align: center;
-            color: #007bff;
-            margin-bottom: 20px;
-        }
-        #chart_div {
-            width: 100%;
-            height: 500px;
-        }
-        .footer {
-            text-align: center;
-            margin-top: 20px;
-            font-size: 14px;
-            color: #6c757d;
         }
     </style>
 </head>
@@ -43,10 +25,7 @@
 
 <div class="container">
     <h1>Nombre de commits par minute</h1>
-    <div id="chart_div"></div>
-    <div class="footer">
-        <p>Graphique généré à partir des commits de <a href="https://github.com/Eliashnf/5MCSI_Metriques" target="_blank" style="color: #007bff; text-decoration: none;">5MCSI_Metriques</a> sur GitHub.</p>
-    </div>
+    <div id="chart_div" style="width: 100%; height: 500px;"></div>
 </div>
 
 <script type="text/javascript">
@@ -88,13 +67,10 @@
 
                     var options = {
                         title: 'Nombre de commits minute par minute',
-                        hAxis: {title: 'Minute', slantedText: true, slantedTextAngle: 45, textStyle: {color: '#495057'}},
-                        vAxis: {title: 'Nombre de commits', textStyle: {color: '#495057'}},
+                        hAxis: {title: 'Minute', slantedText: true, slantedTextAngle: 45},
+                        vAxis: {title: 'Nombre de commits'},
                         legend: {position: 'none'},
-                        backgroundColor: '#ffffff',
-                        colors: ['#007bff'],
-                        titleTextStyle: {color: '#007bff', fontSize: 16},
-                        chartArea: {left: 50, top: 40, width: '80%', height: '70%'}
+                        backgroundColor: '#f1f8e9'
                     };
 
                     var chart = new google.visualization.ColumnChart(document.getElementById('chart_div'));
