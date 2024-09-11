@@ -1,0 +1,54 @@
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <title>Metrique</title>
+    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+  </head>
+  <body>
+    <div id="chart_div" style="width: 900px; height: 500px;"></div>
+    <script>
+      google.charts.load('current', { packages: ['corechart'] });
+      google.charts.setOnLoadCallback(drawBackgroundColor);
+
+      function drawBackgroundColor() {
+        function drawChart(data) {
+          // Convertir les données récupérées en un tableau utilisable par Google Charts
+          var dataTable = new google.visualization.DataTable();
+          dataTable.addColumn('string', 'Date');
+          dataTable.addColumn('number', 'Température');
+
+          // Ajouter les lignes de données
+          data.results.forEach(entry => {
+            var date = new Date(entry.Jour * 1000); // Conversion du timestamp Unix en date
+            dataTable.addRow([date.toLocaleDateString(), entry.temp]); // Ajouter les données dans le tableau
+          });
+
+          // Configurer les options de l'histogramme
+          var options = {
+            title: 'Distribution des températures de la ville de Tawarano',
+            legend: { position: 'none' },
+            histogram: { bucketSize: 5 }, // Contrôle de la largeur des "buckets"
+            hAxis: {
+              title: 'Date'
+            },
+            vAxis: {
+              title: 'Température'
+            },
+            backgroundColor: '#f1f8e9'
+          };
+
+          // Dessiner l'histogramme
+          var chart = new google.visualization.Histogram(document.getElementById('chart_div'));
+          chart.draw(dataTable, options);
+        }
+
+        // Récupération des données depuis l'API /tawarano/
+        fetch('/tawarano/')
+          .then(response => response.json())
+          .then(data => {
+            drawChart(data); // Appel de la fonction drawChart avec les données récupérées
+          });
+      }
+    </script>
+  </body>
+</html>
