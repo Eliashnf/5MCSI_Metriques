@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Page de Contact</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 0;
+        }
+        .container {
+            width: 50%;
+            margin: 50px auto;
+            background-color: #fff;
+            padding: 20px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            border-radius: 8px;
+        }
+        h1 {
+            text-align: center;
+            color: #333;
+        }
+        label {
+            display: block;
+            margin: 15px 0 5px;
+            font-weight: bold;
+        }
+        input[type="text"], input[type="email"], select, textarea {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 20px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+        textarea {
+            height: 150px;
+            resize: none;
+        }
+        input[type="submit"] {
+            width: 100%;
+            padding: 10px;
+            background-color: #007BFF;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+        input[type="submit"]:hover {
+            background-color: #0056b3;
+        }
+        .footer {
+            text-align: center;
+            margin-top: 20px;
+            color: #777;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <h1>Contactez-nous</h1>
+        <form action="submit_form.php" method="POST">
+            <label for="name">Nom complet :</label>
+            <input type="text" id="name" name="name" placeholder="Votre nom complet" required>
+
+            <label for="email">Email :</label>
+            <input type="email" id="email" name="email" placeholder="Votre adresse email" required>
+
+            <label for="subject">Sujet :</label>
+            <select id="subject" name="subject" required>
+                <option value="">Choisissez un sujet</option>
+                <option value="support">Support</option>
+                <option value="feedback">Retour d'expérience</option>
+                <option value="other">Autre</option>
+            </select>
+
+            <label for="message">Message :</label>
+            <textarea id="message" name="message" placeholder="Votre message ici..." required></textarea>
+
+            <input type="submit" value="Envoyer">
+        </form>
+    </div>
+
+    <div class="footer">
+        <p>&copy; 2024 Votre Entreprise. Tous droits réservés.</p>
+    </div>
+
+</body>
+</html>
