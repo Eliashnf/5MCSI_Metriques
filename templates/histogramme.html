@@ -1,0 +1,55 @@
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <title>Metrique</title>
+    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+  </head>
+  <body>
+    <div id="chart_div"></div>
+    <script>
+      // Charger les packages de Google Charts, incluant 'corechart' pour les histogrammes
+      google.charts.load('current', { packages: ['corechart'] });
+      google.charts.setOnLoadCallback(drawBackgroundColor);
+      
+      function drawBackgroundColor() {
+        function drawChart(data) {
+          // Convertir les données récupérées en un tableau utilisable par Google Charts
+          var dataTable = new google.visualization.DataTable();
+          dataTable.addColumn('string', 'Date');
+          dataTable.addColumn('number', 'Valeur');
+          
+          // Ajouter les lignes de données
+          data.results.forEach(entry => {
+            var date = new Date(entry.Jour * 1000);
+            dataTable.addRow([date.toLocaleDateString(), entry.temp]);
+          });
+
+          // Configurer les options de l'histogramme
+          var options = {
+            title: 'Distribution des températures de la ville de Tawarano',
+            legend: { position: 'none' },
+            histogram: { bucketSize: 5 }, // Modifier la taille des "buckets" si nécessaire
+            hAxis: {
+              title: 'Date'
+            },
+            vAxis: {
+              title: 'Température'
+            },
+            backgroundColor: '#f1f8e9'
+          };
+
+          // Dessiner l'histogramme
+          var chart = new google.visualization.Histogram(document.getElementById('chart_div'));
+          chart.draw(dataTable, options);
+        }
+
+        // Récupérer les données de l'API /tawarano/
+        fetch('/tawarano/')
+          .then(response => response.json())
+          .then(data => {
+            drawChart(data);
+          });
+      }
+    </script>
+  </body>
+</html>
